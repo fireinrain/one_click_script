@@ -5,7 +5,7 @@
 checkArchitecture(){
 	# https://stackoverflow.com/questions/48678152/how-to-detect-386-amd64-arm-or-arm64-os-architecture-via-shell-bash
 
-    
+
 	case $(uname -m) in
 		i386)   osArchitecture="386" ;;
 		i686)   osArchitecture="386" ;;
@@ -15,7 +15,7 @@ checkArchitecture(){
 		* )     osArchitecture="arm" ;;
 	esac
 
-    
+
 }
 
 
@@ -38,7 +38,7 @@ getLinuxOSRelease(){
 
 
 getGithubLatestReleaseVersion(){
-    # https://github.com/p4gefau1t/trojan-go/issues/63
+    # https://ghproxy.com/https://github.com/p4gefau1t/trojan-go/issues/63
     wget --no-check-certificate -qO- https://api.github.com/repos/$1/tags | grep 'name' | cut -d\" -f4 | head -1 | cut -b 1-
 }
 
@@ -95,7 +95,7 @@ getIPDKdownloadFilename(){
         elif [ "${filename#*geoip}" != "$filename" ]; then
             v2rayGeoIpFilename="${filename}"
             v2rayGeoIpUrl="https://op.supes.top/packages/x86_64/${v2rayGeoIpFilename}"
-            echo "5 $v2rayGeoIpFilename"            
+            echo "5 $v2rayGeoIpFilename"
         else
             tempUrlXX=""
         fi
@@ -115,7 +115,7 @@ installMosdns(){
         else
             echo " Prepare to install Mosdns on OpenWrt Arm Openwrt ! "
             echo " 准备安装 OpenWrt Arm Mosdns, 如果安装失败 请在下面页面自行查找对应Arm版本进行安装 ! "
-            echo " https://github.com/sbwml/luci-app-mosdns/releases ! "
+            echo " https://ghproxy.com/https://github.com/sbwml/luci-app-mosdns/releases ! "
             echo
             echo " 手动安装方法: "
             echo " 下载文件 v2ray-geoip_2022-07-04_all.ipk, v2ray-geosite_2022-07-04_all.ipk "
@@ -155,17 +155,17 @@ installMosdns(){
     # cnipFilename="cn.dat"
 
     # versionV2rayRulesDat=$(getGithubLatestReleaseVersion "Loyalsoldier/v2ray-rules-dat")
-    # geositeUrl="https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/202205162212/geosite.dat"
-    # geoipeUrl="https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/202205162212/geoip.dat"
-    # cnipUrl="https://github.com/Loyalsoldier/geoip/releases/download/202205120123/cn.dat"
+    # geositeUrl="https://ghproxy.com/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/202205162212/geosite.dat"
+    # geoipeUrl="https://ghproxy.com/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/202205162212/geoip.dat"
+    # cnipUrl="https://ghproxy.com/https://github.com/Loyalsoldier/geoip/releases/download/202205120123/cn.dat"
 
-    geositeUrl="https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
-    geoipeUrl="https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat"
+    geositeUrl="https://ghproxy.com/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
+    geoipeUrl="https://ghproxy.com/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat"
     # cnipUrl="https://raw.githubusercontent.com/Loyalsoldier/geoip/release/cn.dat"
 
 
 
-   
+
     echo
     echo " ================================================== "
     echo " 请填写mosdns运行的端口号 默认端口5335"
@@ -191,13 +191,13 @@ installMosdns(){
     addNewDNSServerIPText=""
     addNewDNSServerDomainText=""
     if [[ "$isAddNewDNSServerInput" == [Nn] ]]; then
-        echo 
+        echo
     else
         echo
         echo " ================================================== "
         echo " 请输入自建的DNS服务器IP 格式例如 1.1.1.1"
         echo " 请保证端口53 提供DNS解析服务, 如果是非53端口请填写端口号, 格式例如 1.1.1.1:8053"
-        echo 
+        echo
         read -r -p "请输入自建DNS服务器IP地址, 请输入:" isAddNewDNSServerIPInput
 
         if [ -n "${isAddNewDNSServerIPInput}" ]; then
@@ -213,12 +213,12 @@ EOM
         echo " ================================================== "
         echo " 请输入自建的DNS服务器的域名 用于提供DOH服务, 格式例如 www.dns.com"
         echo " 请保证服务器在 /dns-query 提供DOH服务, 例如 https://www.dns.com/dns-query"
-        echo 
+        echo
         read -r -p "请输入自建DOH服务器的域名, 不要输入https://, 请直接输入域名:" isAddNewDNSServerDomainInput
 
         if [ -n "${isAddNewDNSServerDomainInput}" ]; then
         read -r -d '' addNewDNSServerDomainText << EOM
-        - addr: "https://${isAddNewDNSServerDomainInput}/dns-query"       
+        - addr: "https://${isAddNewDNSServerDomainInput}/dns-query"
           idle_timeout: 400
           trusted: true
 EOM
@@ -251,13 +251,13 @@ EOM
     if [ ! -f "${mosdnsDownloadPath}/${geositeFilename}" ]; then
         wget -O ${mosdnsDownloadPath}/${geositeFilename} ${geositeUrl}
         wget -O ${mosdnsDownloadPath}/${geoipFilename} ${geoipeUrl}
-    fi 
+    fi
 
     if [ ! -f "${mosdnsDownloadPath}/${geositeFilename}" ]; then
         echo
         echo " ${geositeUrl}"
         echo " 下载失败, 请检查网络是否可以正常访问 gitHub.com"
-    fi 
+    fi
 
     if [ ! -f "${mosdnsDownloadPath}/${geoipFilename}" ]; then
         echo
@@ -267,7 +267,7 @@ EOM
 
 
     echo
-    echo " ================================================== "    
+    echo " ================================================== "
     echo " Install mosdns.ipk and luci-app-mosdns.ipk. 开始安装 mosdns.ipk luci-app-mosdns.ipk"
     echo
 
@@ -296,10 +296,10 @@ EOM
         cp -f ${mosdnsDownloadPath}/${geoipFilename} ${mosdnsEtcPath}
     else
         cp -f /usr/share/v2ray/${geoipFilename} ${mosdnsEtcPath}
-    fi 
+    fi
 
 
-    cat > "${mosdnsEtcPath}/cus_config.yaml" <<-EOF    
+    cat > "${mosdnsEtcPath}/cus_config.yaml" <<-EOF
 
 log:
   level: info
@@ -319,7 +319,7 @@ plugins:
     type: cache
     args:
       size: 4096
-      lazy_cache_ttl: 86400 
+      lazy_cache_ttl: 86400
       cache_everything: true
 
   # hosts map
@@ -375,11 +375,11 @@ ${addNewDNSServerDomainText}
         - addr: "udp://208.67.222.222"
           trusted: true
         - addr: "208.67.220.220:443"
-          trusted: true   
+          trusted: true
 
         #- addr: "udp://172.105.216.54"
         #  idle_timeout: 400
-        #  trusted: true        
+        #  trusted: true
         - addr: "udp://5.2.75.231"
           idle_timeout: 400
           trusted: true
@@ -393,16 +393,16 @@ ${addNewDNSServerDomainText}
 
         - addr: "udp://185.121.177.177"
           idle_timeout: 400
-          trusted: true        
+          trusted: true
         # - addr: "udp://169.239.202.202"
 
 
         - addr: "udp://94.130.180.225"
           idle_timeout: 400
-          trusted: true        
+          trusted: true
         - addr: "udp://78.47.64.161"
           idle_timeout: 400
-          trusted: true 
+          trusted: true
         # - addr: "tls://dns-dot.dnsforfamily.com"
         - addr: "https://dns-doh.dnsforfamily.com/dns-query"
           dial_addr: "94.130.180.225:443"
@@ -410,31 +410,31 @@ ${addNewDNSServerDomainText}
 
         #- addr: "udp://101.101.101.101"
         #  idle_timeout: 400
-        #  trusted: true 
+        #  trusted: true
         #- addr: "udp://101.102.103.104"
         #  idle_timeout: 400
-        #  trusted: true 
+        #  trusted: true
         #- addr: "tls://101.101.101.101"
         # - addr: "https://dns.twnic.tw/dns-query"
         #  idle_timeout: 400
 
         # - addr: "udp://172.104.237.57"
 
-        - addr: "udp://51.38.83.141"          
+        - addr: "udp://51.38.83.141"
         - addr: "tls://dns.oszx.co"
         - addr: "https://dns.oszx.co/dns-query"
-          idle_timeout: 400 
+          idle_timeout: 400
 
         - addr: "udp://176.9.93.198"
-        - addr: "udp://176.9.1.117"                  
+        - addr: "udp://176.9.1.117"
         - addr: "tls://dnsforge.de"
         - addr: "https://dnsforge.de/dns-query"
           idle_timeout: 400
 
-        - addr: "udp://88.198.92.222"                  
+        - addr: "udp://88.198.92.222"
         - addr: "tls://dot.libredns.gr"
         - addr: "https://doh.libredns.gr/dns-query"
-          idle_timeout: 400 
+          idle_timeout: 400
 
 
   # 匹配本地域名的插件

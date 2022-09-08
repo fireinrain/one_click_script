@@ -691,7 +691,7 @@ function installSoftOhMyZsh(){
         green " =================================================="
         yellow " 开始安装 oh-my-zsh"
         green " =================================================="
-        curl -Lo ${HOME}/ohmyzsh_install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        curl -Lo ${HOME}/ohmyzsh_install.sh https://raw.githubusercontent.com/fireinrain/ohmyzsh/master/tools/install.sh
         chmod +x ${HOME}/ohmyzsh_install.sh
         sh ${HOME}/ohmyzsh_install.sh --unattended
     fi
